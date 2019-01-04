@@ -15,48 +15,50 @@ namespace OOP4
 {
     public partial class MainForm : Form
     {
-        int numberOfModels;
-        MyMessageBox myMessageBox;
-        List<Panel> panels;
-        List<Conveyer> conveyers;
-        DetailBase detailBase;
-        Type typeOfNextDetail;
-        Type typeOfMechanic;
-        List<IMechanic> mechanics;
-        Random random;
-        List<Bitmap> bitmaps;
+        //int numberOfModels;
+        //MyMessageBox myMessageBox;
+        //List<Panel> panels;
+        //List<Conveyer> conveyers;
+        //DetailBase detailBase;
+        //Type typeOfNextDetail;
+        //Type typeOfMechanic;
+        //List<IMechanic> mechanics;
+        //Random random;
+        //List<Bitmap> bitmaps;
 
+        ConveyerAddition conveyerAddition;
         public MainForm()
         {
             InitializeComponent();
+
+            conveyerAddition = new ConveyerAddition(messageBoxPanel, maxCountTextBox);
             //Thread newThread = new Thread(new ThreadStart(FormInit));
             //newThread.Start();
-            bitmaps = new List<Bitmap>();
-            numberOfModels = 0;
-            myMessageBox = new MyMessageBox(messageBoxPanel);
-            panels = new List<Panel>();// для создания нескольких конвееров
-            random = new Random();
-            typeOfNextDetail = typeof(Details.SquareDetailDrawing);
-            detailBase = new DetailBase(typeOfNextDetail, Convert.ToInt32(maxCountTextBox.Text));
-            conveyers = new List<Conveyer>();
-            mechanics = new List<IMechanic>();
-            //myMessageBox.AddMessage("первый");
-            //myMessageBox.AddMessage("второй");
-            //myMessageBox.AddMessage("третий");
+
+
+            //bitmaps = new List<Bitmap>();
+            //numberOfModels = 0;
+            //myMessageBox = new MyMessageBox(messageBoxPanel);
+            //panels = new List<Panel>();// для создания нескольких конвееров
+            //random = new Random();
+            //typeOfNextDetail = typeof(Details.SquareDetailDrawing);
+            //detailBase = new DetailBase(typeOfNextDetail, Convert.ToInt32(maxCountTextBox.Text));
+            //conveyers = new List<Conveyer>();
+            //mechanics = new List<IMechanic>();
 
         }
 
         private void DrawPicture(Bitmap bitmap, int numberOfConveyer)
         {
-            Bitmap nbitmap = new Bitmap(bitmap, bitmaps[numberOfConveyer - 1].Width, bitmaps[numberOfConveyer - 1].Height);
+            Bitmap nbitmap = new Bitmap(bitmap, conveyerAddition.Bitmaps[numberOfConveyer - 1].Width, conveyerAddition.Bitmaps[numberOfConveyer - 1].Height);
             //bitmaps[numberOfConveyer - 1] = nbitmap;
-            panels[numberOfConveyer - 1].BackgroundImage = nbitmap;
+            conveyerAddition.Panels[numberOfConveyer - 1].BackgroundImage = nbitmap;
             //panels[numberOfConveyer-1].Invalidate();
         }
         private void ConveyerAdd()
         {
-            ConveyerAddition.AddConveyer(ref  numberOfModels, ref  mainPanel, panels,bitmaps,conveyers, Convert.ToInt32(maxCountTextBox.Text),  detailBase,  myMessageBox,   mechanics,  random,  typeOfMechanic );
-            ConveyerDrawing conveyer = conveyers[numberOfModels - 1] as ConveyerDrawing;
+            conveyerAddition.AddConveyer(ref  mainPanel, maxCountTextBox);
+            ConveyerDrawing conveyer = conveyerAddition.Conveyers[conveyerAddition.NumberOfModels - 1] as ConveyerDrawing;
             conveyer.DrawPicture += DrawPicture;
             //numberOfModels++;
 
@@ -114,21 +116,21 @@ namespace OOP4
         }
         private void roundDetailRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            typeOfNextDetail = typeof(Details.RoundDetailDrawing);
-            detailBase.Type = typeOfNextDetail;
+            conveyerAddition.TypeOfNextDetail = typeof(Details.RoundDetailDrawing);
+            conveyerAddition.DetailBase.Type = conveyerAddition.TypeOfNextDetail;
         }
 
         private void sphereDetailRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            typeOfNextDetail = typeof(Details.SphereDetailDrawing);
-            detailBase.Type = typeOfNextDetail;
+            conveyerAddition.TypeOfNextDetail = typeof(Details.SphereDetailDrawing);
+            conveyerAddition.DetailBase.Type = conveyerAddition.TypeOfNextDetail;
 
         }
 
         private void squareDetailRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            typeOfNextDetail = typeof(Details.SquareDetailDrawing);
-            detailBase.Type = typeOfNextDetail;
+            conveyerAddition.TypeOfNextDetail = typeof(Details.SquareDetailDrawing);
+            conveyerAddition.DetailBase.Type = conveyerAddition.TypeOfNextDetail;
 
         }
 
@@ -140,7 +142,7 @@ namespace OOP4
 
         private async void startConv()
         {
-            await Task.Run(()=>conveyers[numberOfModels-1].StartConveyer(mechanics[numberOfModels - 1]));
+            await Task.Run(()=> conveyerAddition.Conveyers[conveyerAddition.NumberOfModels -1].StartConveyer(conveyerAddition.Mechanics[conveyerAddition.NumberOfModels - 1]));
         }
     }
 }

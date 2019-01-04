@@ -14,7 +14,42 @@ namespace OOP4
 {
     public class ConveyerAddition
     {
-        public static void AddConveyer(ref int numberOfModels, ref Panel mainPanel, List<Panel> panels,List<Bitmap> bitmaps, List<Conveyer> conveyers, int maxDetailsCount, DetailBase detailBase, MyMessageBox myMessageBox,List<IMechanic> mechanics, Random random, Type typeOfMechanic )
+        int numberOfModels;
+        MyMessageBox myMessageBox;
+        List<Panel> panels;
+        List<Conveyer> conveyers;
+        DetailBase detailBase;
+        Type typeOfNextDetail;
+        Type typeOfMechanic;
+        List<IMechanic> mechanics;
+        Random random;
+        List<Bitmap> bitmaps;
+
+        public ConveyerAddition(Panel messageBoxPanel, TextBox maxCountTextBox)
+        {
+            Bitmaps = new List<Bitmap>();
+            NumberOfModels = 0;
+            MyMessageBox = new MyMessageBox(messageBoxPanel);
+            Panels = new List<Panel>();// для создания нескольких конвееров
+            Random = new Random();
+            TypeOfNextDetail = typeof(Details.SquareDetailDrawing);
+            DetailBase = new DetailBase(TypeOfNextDetail, Convert.ToInt32(maxCountTextBox.Text));
+            Conveyers = new List<Conveyer>();
+            Mechanics = new List<IMechanic>();
+        }
+
+        public int NumberOfModels { get => numberOfModels; set => numberOfModels = value; }
+        public MyMessageBox MyMessageBox { get => myMessageBox; set => myMessageBox = value; }
+        public List<Panel> Panels { get => panels; set => panels = value; }
+        public List<Conveyer> Conveyers { get => conveyers; set => conveyers = value; }
+        public DetailBase DetailBase { get => detailBase; set => detailBase = value; }
+        public Type TypeOfNextDetail { get => typeOfNextDetail; set => typeOfNextDetail = value; }
+        public Type TypeOfMechanic { get => typeOfMechanic; set => typeOfMechanic = value; }
+        public List<IMechanic> Mechanics { get => mechanics; set => mechanics = value; }
+        public Random Random { get => random; set => random = value; }
+        public List<Bitmap> Bitmaps { get => bitmaps; set => bitmaps = value; }
+
+        public void AddConveyer(ref Panel mainPanel,TextBox maxCountTextBox)
         {
             numberOfModels++;
 
@@ -36,7 +71,7 @@ namespace OOP4
             panel.BackgroundImage = bitmap;
             bitmaps.Add(bitmap);
 
-            conveyers.Add(new ConveyerDrawing(maxDetailsCount, detailBase, bitmap, numberOfModels));
+            conveyers.Add(new ConveyerDrawing(Convert.ToInt32(maxCountTextBox.Text), detailBase, bitmap, numberOfModels));
             conveyers[numberOfModels - 1].SendMessage += myMessageBox.AddMessage;
             
 

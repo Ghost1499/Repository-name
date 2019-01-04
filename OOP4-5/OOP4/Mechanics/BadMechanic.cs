@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
+
 namespace OOP4.Mechanics
 {
     class BadMechanic:IMechanic
@@ -27,10 +28,13 @@ namespace OOP4.Mechanics
 
         private void Repair()
         {
-            lock (locker)
+            if (Monitor.TryEnter(locker))
             {
-                Thread.Sleep(TimeOfRepairing);
-                ConveyerRepaired(Message);
+                lock (locker)
+                {
+                    Thread.Sleep(TimeOfRepairing);
+                    ConveyerRepaired(Message);
+                }
             }
         }
     }

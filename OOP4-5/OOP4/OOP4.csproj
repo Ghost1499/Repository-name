@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conveyer.cs" />
+    <Compile Include="ConveyerAddition.cs" />
     <Compile Include="ConveyerDrawing.cs" />
     <Compile Include="DetailBase.cs" />
     <Compile Include="Details\Detail.cs" />

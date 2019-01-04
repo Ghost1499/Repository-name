@@ -55,59 +55,62 @@ namespace OOP4
         }
         private void ConveyerAdd()
         {
-            numberOfModels++;
-
-            //typeOfNextDetail = typeof(Details.SquareDetail);
-            //detailBase = new DetailBase(typeOfNextDetail, Convert.ToInt32(maxCountTextBox.Text));
-            Panel panel = new Panel();
-            panel.BorderStyle = BorderStyle.FixedSingle;
-            mainPanel.Controls.Add(panel);
-            panel.Height = mainPanel.Height;
-            panel.Width = mainPanel.Width / numberOfModels;
-            panel.Location = new Point((numberOfModels - 1) * panel.Width,0);
-            for(int i = 0; i < numberOfModels-1; i++)
-            {
-                panels[i].Width = panel.Width;
-                panels[i].Location= new Point(i * panel.Width, 0);
-            }
-            panels.Add(panel);
-            Bitmap bitmap = new Bitmap(panel.Width, panel.Height);
-            panel.BackgroundImage = bitmap;
-            bitmaps.Add(bitmap);
-
-            conveyers.Add(new ConveyerDrawing(Convert.ToInt32(maxCountTextBox.Text), detailBase,bitmap,numberOfModels));
-            conveyers[numberOfModels-1].SendMessage += myMessageBox.AddMessage;
+            ConveyerAddition.AddConveyer(ref  numberOfModels, ref  mainPanel, panels,bitmaps,conveyers, Convert.ToInt32(maxCountTextBox.Text),  detailBase,  myMessageBox,   mechanics,  random,  typeOfMechanic );
             ConveyerDrawing conveyer = conveyers[numberOfModels - 1] as ConveyerDrawing;
             conveyer.DrawPicture += DrawPicture;
+            //numberOfModels++;
 
-            if (mechanics.Count <= 2)
-            {
-                int mechanicCase = random.Next(0, 2);
-                switch (mechanicCase)
-                {
-                    case 0:
-                        {
-                            typeOfMechanic = typeof(Mechanics.GoodMechanic);
-                            break;
-                        }
-                    case 1:
-                        {
-                            typeOfMechanic = typeof(Mechanics.MediumMechanic);
-                            break;
-                        }
-                    case 2:
-                        {
-                            typeOfMechanic = typeof(Mechanics.BadMechanic);
-                            break;
-                        }
-                }
-                ConstructorInfo constructor = typeOfMechanic.GetConstructor(new Type[] { typeof(Conveyer) });
-                mechanics.Add((IMechanic)constructor.Invoke(new object[] { conveyers[numberOfModels - 1] }));
-            }
-            else
-            {
-                mechanics.Add(mechanics[random.Next(0, mechanics.Count)]);
-            }
+            ////typeOfNextDetail = typeof(Details.SquareDetail);
+            ////detailBase = new DetailBase(typeOfNextDetail, Convert.ToInt32(maxCountTextBox.Text));
+            //Panel panel = new Panel();
+            //panel.BorderStyle = BorderStyle.FixedSingle;
+            //mainPanel.Controls.Add(panel);
+            //panel.Height = mainPanel.Height;
+            //panel.Width = mainPanel.Width / numberOfModels;
+            //panel.Location = new Point((numberOfModels - 1) * panel.Width,0);
+            //for(int i = 0; i < numberOfModels-1; i++)
+            //{
+            //    panels[i].Width = panel.Width;
+            //    panels[i].Location= new Point(i * panel.Width, 0);
+            //}
+            //panels.Add(panel);
+            //Bitmap bitmap = new Bitmap(panel.Width, panel.Height);
+            //panel.BackgroundImage = bitmap;
+            //bitmaps.Add(bitmap);
+
+            //conveyers.Add(new ConveyerDrawing(Convert.ToInt32(maxCountTextBox.Text), detailBase,bitmap,numberOfModels));
+            //conveyers[numberOfModels-1].SendMessage += myMessageBox.AddMessage;
+            //ConveyerDrawing conveyer = conveyers[numberOfModels - 1] as ConveyerDrawing;
+            //conveyer.DrawPicture += DrawPicture;
+
+            //if (mechanics.Count <= 2)
+            //{
+            //    int mechanicCase = random.Next(0, 2);
+            //    switch (mechanicCase)
+            //    {
+            //        case 0:
+            //            {
+            //                typeOfMechanic = typeof(Mechanics.GoodMechanic);
+            //                break;
+            //            }
+            //        case 1:
+            //            {
+            //                typeOfMechanic = typeof(Mechanics.MediumMechanic);
+            //                break;
+            //            }
+            //        case 2:
+            //            {
+            //                typeOfMechanic = typeof(Mechanics.BadMechanic);
+            //                break;
+            //            }
+            //    }
+            //    ConstructorInfo constructor = typeOfMechanic.GetConstructor(new Type[] { typeof(Conveyer) });
+            //    mechanics.Add((IMechanic)constructor.Invoke(new object[] { conveyers[numberOfModels - 1] }));
+            //}
+            //else
+            //{
+            //    mechanics.Add(mechanics[random.Next(0, mechanics.Count)]);
+            //}
         }
         private void roundDetailRadioButton_CheckedChanged(object sender, EventArgs e)
         {

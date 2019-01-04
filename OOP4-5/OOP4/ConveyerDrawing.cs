@@ -46,7 +46,7 @@ namespace OOP4
 
         public override void StartConveyer(IMechanic mechanic)
         {
-            ConveyerMove();
+            //ConveyerMove();
             base.StartConveyer(mechanic);
         }
         private void ConveyerMove()

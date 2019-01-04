@@ -1,0 +1,10 @@
+C:\CSF\programming\programs\OOP4\OOP4\obj\Debug\OOP4.csprojAssemblyReference.cache
+C:\CSF\programming\programs\OOP4\OOP4\obj\Debug\OOP4.MainForm.resources
+C:\CSF\programming\programs\OOP4\OOP4\obj\Debug\OOP4.Properties.Resources.resources
+C:\CSF\programming\programs\OOP4\OOP4\obj\Debug\OOP4.csproj.GenerateResource.cache
+C:\CSF\programming\programs\OOP4\OOP4\obj\Debug\OOP4.csproj.CoreCompileInputs.cache
+C:\CSF\programming\programs\OOP4\OOP4\bin\Debug\OOP4.exe.config
+C:\CSF\programming\programs\OOP4\OOP4\bin\Debug\OOP4.exe
+C:\CSF\programming\programs\OOP4\OOP4\bin\Debug\OOP4.pdb
+C:\CSF\programming\programs\OOP4\OOP4\obj\Debug\OOP4.exe
+C:\CSF\programming\programs\OOP4\OOP4\obj\Debug\OOP4.pdb
